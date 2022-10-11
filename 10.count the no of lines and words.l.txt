@@ -1,0 +1,19 @@
+%{
+int nchar, nword, nline; 
+%}
+%%
+n { nline++; nchar++; } 
+[^ tn]+ { nword++, nchar += yyleng; } 
+. { nchar++; } 
+%%
+int yywrap(void) { 
+return 1; 
+} 
+int main(int argc, char argv[]) { 
+yyin = fopen(argv[1], r); 
+yylex(); 
+printf(Number of characters = %dn, nchar); 
+printf(Number of words = %dn, nword); 
+printf(Number of lines = %dn, nline); 
+fclose(yyin); 
+}

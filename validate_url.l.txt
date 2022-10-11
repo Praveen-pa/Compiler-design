@@ -1,0 +1,19 @@
+%{
+   #include<stdio.h>
+%}
+
+%%
+("http://"+[a-z]+".com"|".edu"|".org") {printf("Vaild");}
+("https://"+[a-z]+".com"|".edu"|".org") {printf("Vaild");}
+.+ {printf("Invalid");}
+
+%%
+int yywrap(){
+return 1;
+}
+int main(int argc,char*argv[])
+{
+    printf("Enter the mail:");
+    yylex();
+    return 0;
+}
